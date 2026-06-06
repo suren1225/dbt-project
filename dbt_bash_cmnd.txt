@@ -1,0 +1,95 @@
+C:\Users\SurendiranV\dbt_assessment\dbt_project
+cd transformation
+dbt --version
+pip install dbt-duckdb
+dbt deps
+dbt ls --select staging
+dbt show --select dbt_interview.staging.stg_salesforce__account
+
+mkdir intermediate
+cd intermediate
+mkdir salse
+
+create int_opportunity_enriched.sql, int_opportunity_enriched.yml files under sales
+
+cd .. (back to trasnaform)
+
+
+dbt clean
+dbt compile
+dbt deps
+
+dbt run --select models/intermediate
+
+dbt test --select models/intermediate
+
+dbt run --select int_opportunity_enriched
+
+dbt run --select models/mart
+
+dbt test --select models/marts
+
+dbt seed
+
+dbt snapshot
+
+dbt test --select test_type:singular
+
+dbt build --full-refresh
+
+dbt docs generate
+
+dbt docs serve --host 0.0.0.0 --port 8080
+
+
+--====================================================
+
+mkdir airflow_dbt
+cd airflow_dbt
+cd C:\Users\SurendiranV\dbt_assessment\airflow_dbt
+
+mkdir dags
+mkdir logs
+docker-compose.yaml
+
+docker compose up -d
+
+http://localhost:8080
+or
+
+cmd 
+docker logs airflow_dbt-airflow-1
+
+Password for user 'admin': rGAECp4nRXYtbzyh
+
+docker ps
+docker exec -it airflow_dbt-airflow-1 bash
+
+dbt --version
+airflow version
+
+docker exec -it airflow_dbt-airflow-1 bash
+
+pip install dbt-core dbt-duckdb
+
+docker logs airflow_dbt-airflow-1
+ 
+airflow dags list
+
+python /opt/airflow/dags/dbt_pipeline.py
+
+cd C:\Users\SurendiranV\dbt_assessment\airflow_dbt
+docker compose down
+docker compose up -d
+
+docker ps
+docker logs airflow_dbt-airflow-1
+
+docker logs --tail 100 airflow_dbt-airflow-1
+docker exec -it airflow_dbt-airflow-1 bash
+
+docker debug airflow_dbt-airflow-1
+
+docker exec -it airflow_dbt-airflow-1 which dbt
+
+--====================================================
