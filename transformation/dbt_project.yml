@@ -24,14 +24,14 @@ models:
   dbt_interview:
     +database: dbt
     intermediate:
-      +materialized: table
+      +materialized: view
       +schema: intermediate
     marts:
       +schema: marts
       +materialized: table
     staging:
       +schema: staging
-      +materialized: view
+      +materialized: table
 
 vars:
   "dbt_date:time_zone": "Europe/Berlin"

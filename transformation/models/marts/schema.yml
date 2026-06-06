@@ -1,0 +1,65 @@
+version: 2
+
+models:
+
+  - name: dim_customer
+    columns:
+      - name: customer_key
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_user
+    columns:
+      - name: user_key
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_product
+    columns:
+      - name: product_key
+        tests:
+          - not_null
+
+  - name: dim_campaign
+    columns:
+      - name: campaign_key
+        tests:
+          - unique
+          - not_null
+
+  - name: fct_opportunity
+    columns:
+      - name: customer_key
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_customer')
+                field: customer_key
+
+      - name: user_key
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_user')
+                field: user_key
+
+  - name: fct_case
+    columns:
+      - name: accountid
+        tests:
+          - not_null
+
+  - name: fct_lead
+    columns:
+      - name: lead_key
+        tests:
+          - unique
+          - not_null
+
+  - name: fct_pipeline
+    columns:
+      - name: opportunity_stage_key
+        tests:
+          - not_null
